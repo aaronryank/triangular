@@ -28,7 +28,7 @@ int main(int argc, char **argv)
     if (!in)
         return fprintf(stderr,"Error: Could not open file %s: %s\n",argv[1],strerror(errno));
 
-    int size, c, i;
+    int size = 0, c, i;
     while ((c = getc(in)) != EOF) if (c != ' ' && c != '\n' && c != '\r') size++;
     rewind(in);
 
