@@ -67,6 +67,10 @@ Acronyms: **ToS** = top of stack, **IP** = instruction pointer
     , switch to direction 6 (SW)
     v switch to direction 7 (S)
     \ switch to direction 8 (SE)
+    o rotate the direction of the IP clockwise
+    e rotate the direction of the IP counter-clockwise
+    c rotate the direction of the IP clockwise, then become z
+    z rotate the direction of the IP counter-clockwise, then become c
 
 ## Program commands
 
@@ -98,11 +102,6 @@ Acronyms: **ToS** = top of stack, **IP** = instruction pointer
     x do away with the most recently accumulated (
     ; end program if ToS <0
 
-## Unimplemented/reserved stuff
+## Unused characters
 
-    o rotate the direction of the IP clockwise
-    e rotate the direction of the IP counter-clockwise
-    c rotate the direction of the IP clockwise, then become z
-    z rotate the direction of the IP counter-clockwise, then become c
-
-Unused characters: 0#='":[{}|abfghjklmnqrtuwyABCDEFGHIJKLMNOPQRSTUVWXYZ
+    0#='":[{}|abfghjklmnqrtuwyABCDEFGHIJKLMNOPQRSTUVWXYZ
