@@ -70,18 +70,20 @@ void parse(char command)
       case '\\':direction = 8; break;
       case 'o': direction = direction == 8 ? 1 : direction + 1; break;
       case 'e': direction = direction == 1 ? 8 : direction - 1; break;
+      case 'c': direction = direction == 8 ? 1 : direction + 1; buf[y][x] = 'z'; break;
+      case 'z': direction = direction == 1 ? 8 : direction - 1; buf[y][x] = 'c'; break;
 
       /* program */
       case '&': exit(EXIT_SUCCESS);
 
       /* stack */
-      case 'p': stack[--size] = 0;               break;
-      case '+': stack[size-2] += stack[size-1]; size--; break;
-      case '-': stack[size-2] -= stack[size-1]; size--; break;
-      case '*': stack[size-2] *= stack[size-1]; size--; break;
-      case '_': stack[size-2] /= stack[size-1]; size--; break;
-      case 'i': stack[size-1]++;                 break;
-      case 'd': stack[size-1]--;                 break;
+      case 'p': size > 0 && (size--);   break;
+      case '+': size > 1 && (stack[size-2] += stack[size-1]); size > 1 && (size--); break;
+      case '-': size > 1 && (stack[size-2] -= stack[size-1]); size > 1 && (size--); break;
+      case '*': size > 1 && (stack[size-2] *= stack[size-1]); size > 1 && (size--); break;
+      case '_': size > 1 && (stack[size-2] /= stack[size-1]); size > 1 && (size--); break;
+      case 'i': size > 0 && (stack[size-1]++);     break;
+      case 'd': size > 0 && (stack[size-1]--);     break;
 
       case '$': stack[size++] = getchar() - '0'; break;
       case '~': stack[size++] = getchar();       break;
