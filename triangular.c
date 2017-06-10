@@ -68,6 +68,8 @@ void parse(char command)
       case ',': direction = 6; break;
       case '|': direction = 7; break;
       case '\\':direction = 8; break;
+      case 'o': direction = direction == 8 ? 1 : direction + 1; break;
+      case 'e': direction = direction == 1 ? 8 : direction - 1; break;
 
       /* program */
       case '&': exit(EXIT_SUCCESS);
