@@ -28,8 +28,10 @@ int main(int argc, char **argv)
     if (!in)
         return fprintf(stderr,"Error: Could not open file %s: %s\n",argv[1],strerror(errno));
 
-    int size, c, i;
-    while ((c = getc(in)) != EOF) if (c != ' ' && c != '\n' && c != '\r') size++;
+    int size = 0, c, i;
+    while ((c = getc(in)) != EOF)
+        if (c != ' ' && c != '\n' && c != '\r')
+            size++;
     rewind(in);
 
     int len = getmax(size) - 1;
@@ -43,7 +45,7 @@ int main(int argc, char **argv)
             j = i;
             while (j) {
                 c = getc(in);
-                if (c != ' ' && c != '\n') {
+                if (c != ' ' && c != '\n' && c != '\r') {
                     printf("%c ",c);
                     j--;
                 }
