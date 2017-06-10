@@ -70,6 +70,8 @@ void parse(char command)
       case '\\':direction = 8; break;
       case 'o': direction = direction == 8 ? 1 : direction + 1; break;
       case 'e': direction = direction == 1 ? 8 : direction - 1; break;
+      case 'c': direction = direction == 8 ? 1 : direction + 1; buf[y][x] = 'z'; break;
+      case 'z': direction = direction == 1 ? 8 : direction - 1; buf[y][x] = 'c'; break;
 
       /* program */
       case '&': exit(EXIT_SUCCESS);
