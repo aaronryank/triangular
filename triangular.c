@@ -29,7 +29,7 @@ void triangular(void)
 
         switch (direction) {
           case NORTHWEST:   dx = -1; dy = -1; break;
-          case NORTH:       dx = -1; dy =  2; break;
+          case NORTH:       dx = -1; dy = -2; break;
           case NORTHEAST:   dx =  0; dy = -1; break;
           case WEST:        dx = -1; dy =  0; break;
           case EAST:        dx =  1; dy =  0; break;
@@ -37,7 +37,7 @@ void triangular(void)
           case SOUTH:       dx =  1; dy =  2; break;
           case SOUTHEAST:   dx =  1; dy =  1; break;
         }
-        
+
         skip = skip < 0 ? 0 : skip;
         x += dx * (skip + 1);
         y += dy * (skip + 1);
@@ -77,7 +77,7 @@ int next_direction(int direction, int change)
             case SOUTHWEST: return SOUTH;
             case WEST:      return SOUTHWEST;
             case NORTHWEST: return WEST;
-        }        
+        }
     }
 
     return -1;
@@ -144,7 +144,7 @@ void parse(char command)
         }
         break;
       case ']':
-        if (size && stack[size-1]) {
+        if (size && stack[size-1] > 0) {
           x = jump[jumps-1].x;
           y = jump[jumps-1].y;
           direction = jump[jumps-1].d;
