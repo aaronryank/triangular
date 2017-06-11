@@ -43,9 +43,8 @@ void triangular(void)
         y += dy * (skip + 1);
         skip = 0;
 
-        if ((direction == WEST && x < 0) || (direction == NORTH && y < 0) || (direction == NORTHWEST && (y < 0 || x < 0)))
+        if (x < 0 || x > y || y < 0 || y >= 1000)
             exit(EXIT_SUCCESS);
-
         if (x < 0)
             x = 0;
         if (y < 0)
