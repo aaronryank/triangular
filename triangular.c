@@ -134,7 +134,7 @@ void parse(char command)
       case 's': skip = (size ? stack[size-1] : 0);                     break;
       case ';': if (!size || (stack[size-1] <= 0)) exit(EXIT_SUCCESS); break;
 
-      case 'x': jumps && jumps--;
+      case 'x': jumps && jumps--; break;
       case '(':
         jump[jumps].x = x;
         jump[jumps].y = y;
@@ -149,7 +149,7 @@ void parse(char command)
         }
         break;
       case ']':
-        if (size && stack[size-1] > 0) {
+        if (jumps && size && stack[size-1]) {
           x = jump[jumps-1].x;
           y = jump[jumps-1].y;
           direction = jump[jumps-1].d;
