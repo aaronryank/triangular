@@ -125,10 +125,10 @@ void parse(char command)
       stack[size++] = command - '0';             break;
 
       /* conditionals */
-      case '?': skip = size ? (stack[size-1] < 1) : 0;                  break;
+      case '?': skip = size ? (stack[size-1] <= 0) : 1;                  break;
       case '!': skip = size ? (stack[size-1] > 0) : 0;                  break;
       case 's': skip = (size ? stack[size-1] : 0);                      break;
-      case ';': if ((size ? stack[size-1] : 0) < 1) exit(EXIT_SUCCESS); break;
+      case ';': if (!size || (stack[size-1] <= 0)) exit(EXIT_SUCCESS); break;
 
       case 'x': jumps--;
       case '(':
