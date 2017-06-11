@@ -93,14 +93,14 @@ Acronyms: **ToS** = top of stack, **IP** = instruction pointer
 
 ## Conditionals (stolen directly from Surface)
 
-    ? skip one instruction in the direction the IP is facing if ToS is <1
-    ! skip one instruction in the direction the IP is facing if ToS is >0
+    ? skip one instruction in the direction the IP is facing if ToS is <= 0
+    ! skip one instruction in the direction the IP is facing if ToS is > 0
     s skip the quantity of following instructions as specified by the number contained in ToS
     ( set a point to be jumped to by ) and ]
     ) unconditionally move the instruction pointer back to the most recent (
-    ] move the instruction pointer back to the most recent ( if the ToS is >0
+    ] move the instruction pointer back to the most recent ( if the ToS is > 0
     x do away with the most recently accumulated (
-    ; end program if ToS <0
+    ; end program if ToS <= 0
 
 ## Unused characters
 
