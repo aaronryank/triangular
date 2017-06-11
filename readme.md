@@ -2,11 +2,11 @@
 
 Triangular is a two-dimensional stack-based esoteric programming language, inspired by Surface and Hexagony.
 Source code is read in the shape of the smallest triangle that the length of the code can fit into. Whitespace is ignored.
-For example, if the source code was simply six periods, Triangular would format this into:
+For example, if the source code was `123456`, Triangular would format this into:
 
-      .
-     . .
-    . . .
+      1
+     2 3
+    4 5 6
 
 Command-line options:
 
