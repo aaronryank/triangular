@@ -144,7 +144,7 @@ void parse(char command)
         }
         break;
       case ']':
-        if (size && stack[size-1]) {
+        if (size && stack[size-1] > 0) {
           x = jump[jumps-1].x;
           y = jump[jumps-1].y;
           direction = jump[jumps-1].d;
