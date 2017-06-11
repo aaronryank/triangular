@@ -82,6 +82,7 @@ Acronyms: **ToS** = top of stack, **IP** = instruction pointer
 ## Stack commands
 
     p pop
+    : duplicate ToS
     + add ToS and ToS-1, pop both, push result
     - subtract ToS from ToS-1, pop both, push result
     * multiply ToS and ToS-1 together, pop both, push result
@@ -114,4 +115,4 @@ Acronyms: **ToS** = top of stack, **IP** = instruction pointer
 
 ## Unused characters
 
-    0#='":[{}|abfghjklmnqrtuwyABCDEFGHIJKLMNOPQRSTUVWXYZ
+    0#='":[{}|abfghjklmnqrtuwyABCDEFGHIJKLMNOQRTVWXYZ

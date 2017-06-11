@@ -109,6 +109,7 @@ void parse(char command)
 
       /* stack */
       case 'p': size > 0 && (size--);                                               break;
+      case ':': size > 0 && (stack[size] = stack[size-1]); size > 0 && (size++);    break;
       case '+': size > 1 && (stack[size-2] += stack[size-1]); size > 1 && (size--); break;
       case '-': size > 1 && (stack[size-2] -= stack[size-1]); size > 1 && (size--); break;
       case '*': size > 1 && (stack[size-2] *= stack[size-1]); size > 1 && (size--); break;
