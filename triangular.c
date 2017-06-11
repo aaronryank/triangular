@@ -43,9 +43,8 @@ void triangular(void)
         y += dy * (skip + 1);
         skip = 0;
 
-        if ((direction == WEST && x < 0) || (direction == NORTH && y < 0) || (direction == NORTHWEST && (y < 0 || x < 0)))
+        if (x < 0 || x > y || y < 0 || y >= 1000)
             exit(EXIT_SUCCESS);
-
         if (x < 0)
             x = 0;
         if (y < 0)
@@ -125,12 +124,12 @@ void parse(char command)
       stack[size++] = command - '0';             break;
 
       /* conditionals */
-      case '?': skip = size ? (stack[size-1] < 1) : 0;                  break;
+      case '?': skip = size ? (stack[size-1] <= 0) : 1;                  break;
       case '!': skip = size ? (stack[size-1] > 0) : 0;                  break;
       case 's': skip = (size ? stack[size-1] : 0);                      break;
-      case ';': if ((size ? stack[size-1] : 0) < 1) exit(EXIT_SUCCESS); break;
+      case ';': if (!size || (stack[size-1] <= 0)) exit(EXIT_SUCCESS); break;
 
-      case 'x': jumps--;
+      case 'x': jumps && jumps--;
       case '(':
         jump[jumps].x = x;
         jump[jumps].y = y;
@@ -138,12 +137,14 @@ void parse(char command)
         jumps++;
         break;
       case ')':
-        x = jump[jumps-1].x;
-        y = jump[jumps-1].y;
-        direction = jump[jumps-1].d;
+        if (jumps) {
+          x = jump[jumps-1].x;
+          y = jump[jumps-1].y;
+          direction = jump[jumps-1].d;
+        }
         break;
       case ']':
-        if (stack[size-1]) {
+        if (size && stack[size-1]) {
           x = jump[jumps-1].x;
           y = jump[jumps-1].y;
           direction = jump[jumps-1].d;
