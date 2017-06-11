@@ -44,13 +44,7 @@ void triangular(void)
         y += dy * (skip + 1);
         skip = 0;
 
-        if (x < 0 || x > y || y < 0 || y >= 1000)
-            exit(EXIT_SUCCESS);
-        if (x < 0)
-            x = 0;
-        if (y < 0)
-            y = 0;
-        if (buf[y][x] == 0)
+        if (x < 0 || x > y || y < 0 || y >= 1000 || buf[y][x] <= 0)
             exit(EXIT_SUCCESS);
     }
 }
@@ -114,11 +108,11 @@ void parse(char command)
       case '-': size > 1 && (stack[size-2] -= stack[size-1]); size > 1 && (size--); break;
       case '*': size > 1 && (stack[size-2] *= stack[size-1]); size > 1 && (size--); break;
       case '_': size > 1 && (stack[size-2] /= stack[size-1]); size > 1 && (size--); break;
-      case 'i': size > 0 && (stack[size-1]++);     break;
-      case 'd': size > 0 && (stack[size-1]--);     break;
+      case 'i': size > 0 && (stack[size-1]++);                                      break;
+      case 'd': size > 0 && (stack[size-1]--);                                      break;
 
-      case '$': stack[size++] = getchar() - '0'; break;
-      case '~': stack[size++] = getchar();       break;
+      case '$': stack[size++] = getchar() - '0';            break;
+      case '~': stack[size++] = getchar();                  break;
       case '%': printf("%d",size ? stack[size-1] : 0);      break;
       case '@': putchar(size ? stack[size-1] : 0);          break;
 
@@ -135,9 +129,9 @@ void parse(char command)
       case 'U': memory && (stack[size++] = memory);                 break;
 
       /* conditionals */
-      case '?': skip = size ? (stack[size-1] <= 0) : 1;                  break;
-      case '!': skip = size ? (stack[size-1] > 0) : 0;                  break;
-      case 's': skip = (size ? stack[size-1] : 0);                      break;
+      case '?': skip = size ? (stack[size-1] <= 0) : 1;                break;
+      case '!': skip = size ? (stack[size-1] > 0) : 0;                 break;
+      case 's': skip = (size ? stack[size-1] : 0);                     break;
       case ';': if (!size || (stack[size-1] <= 0)) exit(EXIT_SUCCESS); break;
 
       case 'x': jumps && jumps--;
