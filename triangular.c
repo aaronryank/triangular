@@ -89,25 +89,25 @@ void parse(char command)
         putchar(command);
 
     switch (command) {
-      /* directional */   /* I need to prettify this */
-      case '`': direction = NORTHWEST; break;
-      case '^': direction = NORTH; break;
-      case '/': direction = NORTHEAST; break;
-      case '<': direction = WEST; break;
-      case '>': direction = EAST; break;
-      case ',': direction = SOUTHWEST; break;
-      case 'v': direction = SOUTH; break;
-      case '\\':direction = SOUTHEAST; break;
-      case 'o': direction = next_direction(direction, 1); break;
-      case 'e': direction = next_direction(direction, -1); break;
-      case 'c': direction = next_direction(direction, 1); buf[y][x] = 'z'; break;
+      /* directional */
+      case '`': direction = NORTHWEST;                                      break;
+      case '^': direction = NORTH;                                          break;
+      case '/': direction = NORTHEAST;                                      break;
+      case '<': direction = WEST;                                           break;
+      case '>': direction = EAST;                                           break;
+      case ',': direction = SOUTHWEST;                                      break;
+      case 'v': direction = SOUTH;                                          break;
+      case '\\':direction = SOUTHEAST;                                      break;
+      case 'o': direction = next_direction(direction, 1);                   break;
+      case 'e': direction = next_direction(direction, -1);                  break;
+      case 'c': direction = next_direction(direction, 1); buf[y][x] = 'z';  break;
       case 'z': direction = next_direction(direction, -1); buf[y][x] = 'c'; break;
 
       /* program */
       case '&': exit(EXIT_SUCCESS);
 
       /* stack */
-      case 'p': size > 0 && (size--);   break;
+      case 'p': size > 0 && (size--);                                               break;
       case '+': size > 1 && (stack[size-2] += stack[size-1]); size > 1 && (size--); break;
       case '-': size > 1 && (stack[size-2] -= stack[size-1]); size > 1 && (size--); break;
       case '*': size > 1 && (stack[size-2] *= stack[size-1]); size > 1 && (size--); break;
@@ -119,6 +119,10 @@ void parse(char command)
       case '~': stack[size++] = getchar();       break;
       case '%': printf("%d",size ? stack[size-1] : 0);      break;
       case '@': putchar(size ? stack[size-1] : 0);          break;
+
+      case '=': size > 1 ? stack[size] = (stack[size-2] == stack[size-1]) : (stack[size] = 0);
+                size++;
+                break;
 
       case '1': case '2': case '3': case '4': case '5': case '6': case '7': case'8': case '9':
       stack[size++] = command - '0';             break;

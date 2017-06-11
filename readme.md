@@ -49,6 +49,8 @@ IP starts from the top of the triangle, moving in direction 8 (SE).
       . . . .
      . . . . .
 
+If the IP goes off the playing field, the program will terminate.
+
 Acronyms: **ToS** = top of stack, **IP** = instruction pointer
 
      `^/
@@ -83,6 +85,7 @@ Acronyms: **ToS** = top of stack, **IP** = instruction pointer
     - subtract ToS from ToS-1, pop both, push result
     * multiply ToS and ToS-1 together, pop both, push result
     _ divide ToS-1 by ToS, pop both, push result
+    = compare ToS and ToS-1 for equality, DON'T pop, push result
     d decrement ToS
     i increment ToS
     $ input ToS as a number
