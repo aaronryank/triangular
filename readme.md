@@ -2,13 +2,13 @@
 
 Triangular is a two-dimensional stack-based esoteric programming language, inspired by Surface and Hexagony.
 Source code is read in the shape of the smallest triangle that the length of the code can fit into. Whitespace is ignored.
-For example, if the source code was simply six periods, Triangular would format this into:
+For example, if the source code was `123456`, Triangular would format this into:
 
-      .
-     . .
-    . . .
+      1
+     2 3
+    4 5 6
 
-Command-line options:
+To build, type `make`. This will generate an executable `triangular`. Command-line options:
 
     --verbose                     prettyprint the triangle
     --verbose --display-code      prettyprint the triangle and display code as it's read
@@ -18,6 +18,7 @@ Triangular has:
  - A stack size of 30,000
  - A maximum of 300 jumps
  - A maximum source code of 1000 lines, 1000 characters per line
+ - A second stack (see section Memory), which is currently just one value.
 
 There are eight directions in which the instruction pointer can move (lines added for prettiness):
 
@@ -48,6 +49,8 @@ IP starts from the top of the triangle, moving in direction 8 (SE).
        . . .
       . . . .
      . . . . .
+
+If the IP goes off the playing field, the program will terminate.
 
 Acronyms: **ToS** = top of stack, **IP** = instruction pointer
 
@@ -83,6 +86,7 @@ Acronyms: **ToS** = top of stack, **IP** = instruction pointer
     - subtract ToS from ToS-1, pop both, push result
     * multiply ToS and ToS-1 together, pop both, push result
     _ divide ToS-1 by ToS, pop both, push result
+    = compare ToS and ToS-1 for equality, DON'T pop, push result
     d decrement ToS
     i increment ToS
     $ input ToS as a number
@@ -90,6 +94,12 @@ Acronyms: **ToS** = top of stack, **IP** = instruction pointer
     % print ToS as integer
     @ print ToS as character
     1 push 1 to stack. 2 pushes 2, etc.
+
+## Memory commands
+
+    P pop ToS stack to memory
+    S stash ToS in memory
+    U pull memory to stack
 
 ## Conditionals (stolen directly from Surface)
 
