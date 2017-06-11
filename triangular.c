@@ -10,7 +10,16 @@ int jumps;
 extern int verbose, display_code;
 
 extern char buf[1000][1000];
-int direction, skip, x, y;
+int direction, skip, x, y, dx, dy;
+
+const int NORTHWEST = 1;
+const int NORTH = 2;
+const int NORTHEAST = 3;
+const int WEST = 4;
+const int EAST = 5;
+const int SOUTHWEST = 6;
+const int SOUTH = 7;
+const int SOUTHEAST = 8;
 
 void parse(char);
 
@@ -26,17 +35,21 @@ void triangular(void)
         parse(buf[y][x]);
 
         switch (direction) {
-          case 1: x--; y--;    break;
-          case 2: y -= 2; x--; break;
-          case 3: y--;         break;
-          case 4: x--;         break;
-          case 5: x++;         break;
-          case 6: y++;         break;
-          case 7: y += 2; x++; break;
-          case 8: x++, y++;    break;
+          case NORTHWEST:   dx = -1; dy = -1; break;
+          case NORTH:       dx = -1; dy =  2; break;
+          case NORTHEAST:   dx =  0; dy = -1; break;
+          case WEST:        dx = -1; dy =  0; break;
+          case EAST:        dx =  1; dy =  0; break;
+          case SOUTHWEST:   dx =  0; dy =  1; break;
+          case SOUTH:       dx =  1; dy =  2; break;
+          case SOUTHEAST:   dx =  1; dy =  1; break;
         }
+        
+        x += dx * (skip + 1);
+        y += dy * (skip + 1);
+        skip = 0;
 
-        if ((direction == 4 && x < 0) || (direction == 2 && y < 0) || (direction == 1 && (y < 0 || x < 0)))
+        if ((direction == WEST && x < 0) || (direction == NORTH && y < 0) || (direction == NORTHWEST && (y < 0 || x < 0)))
             exit(EXIT_SUCCESS);
 
         if (x < 0)
@@ -48,30 +61,53 @@ void triangular(void)
     }
 }
 
+int next_direction(int direction, int change)
+{
+    if (change == 1){
+        switch (direction) {
+            case NORTH:     return NORTHEAST;
+            case NORTHEAST: return EAST;
+            case EAST:      return SOUTHEAST;
+            case SOUTHEAST: return SOUTH;
+            case SOUTH:     return SOUTHWEST;
+            case SOUTHWEST: return WEST;
+            case WEST:      return NORTHWEST;
+            case NORTHWEST: return NORTH;
+        }
+    }else{
+        switch (direction) {
+            case NORTH:     return NORTHWEST;
+            case NORTHEAST: return NORTH;
+            case EAST:      return NORTHEAST;
+            case SOUTHEAST: return EAST;
+            case SOUTH:     return SOUTHEAST;
+            case SOUTHWEST: return SOUTH;
+            case WEST:      return SOUTHWEST;
+            case NORTHWEST: return WEST;
+        }        
+    }
+    return -1;
+}
+
 void parse(char command)
 {
-    if (skip) {
-        skip--;
-        return;
-    }
-
     if (display_code)
         putchar(command);
 
     switch (command) {
       /* directional */
-      case '`': direction = 1; break;
-      case '^': direction = 2; break;
-      case '/': direction = 3; break;
-      case '<': direction = 4; break;
-      case '>': direction = 5; break;
-      case ',': direction = 6; break;
-      case '|': direction = 7; break;
-      case '\\':direction = 8; break;
-      case 'o': direction = direction == 8 ? 1 : direction + 1; break;
-      case 'e': direction = direction == 1 ? 8 : direction - 1; break;
-      case 'c': direction = direction == 8 ? 1 : direction + 1; buf[y][x] = 'z'; break;
-      case 'z': direction = direction == 1 ? 8 : direction - 1; buf[y][x] = 'c'; break;
+      case '`': direction = NORTHWEST; break;
+      case '^': direction = NORTH; break;
+      case '/': direction = NORTHEAST; break;
+      case '<': direction = WEST; break;
+      case '>': direction = EAST; break;
+      case ',': direction = SOUTHWEST; break;
+      case 'v': direction = SOUTH; break;
+      case '\\':direction = SOUTHEAST; break;
+      case 'o': direction = next_direction(direction, 1); break;
+      case 'e': direction = next_direction(direction, -1); break;
+      case 'c': direction = next_direction(direction, 1); buf[y][x] = 'z'; break;
+      case 'z': direction = next_direction(direction, -1); buf[y][x] = 'c'; break;
 
       /* program */
       case '&': exit(EXIT_SUCCESS);
