@@ -12,14 +12,7 @@ extern int verbose, display_code;
 extern char buf[1000][1000];
 int direction, skip, x, y, dx, dy;
 
-const int NORTHWEST = 1;
-const int NORTH = 2;
-const int NORTHEAST = 3;
-const int WEST = 4;
-const int EAST = 5;
-const int SOUTHWEST = 6;
-const int SOUTH = 7;
-const int SOUTHEAST = 8;
+enum { UNDEF, NORTHWEST, NORTH, NORTHEAST, WEST, EAST, SOUTHWEST, SOUTH, SOUTHEAST };
 
 void parse(char);
 
@@ -64,7 +57,7 @@ void triangular(void)
 
 int next_direction(int direction, int change)
 {
-    if (change == 1){
+    if (change == 1) {
         switch (direction) {
             case NORTH:     return NORTHEAST;
             case NORTHEAST: return EAST;
@@ -75,7 +68,7 @@ int next_direction(int direction, int change)
             case WEST:      return NORTHWEST;
             case NORTHWEST: return NORTH;
         }
-    }else{
+    } else {
         switch (direction) {
             case NORTH:     return NORTHWEST;
             case NORTHEAST: return NORTH;
@@ -87,6 +80,7 @@ int next_direction(int direction, int change)
             case NORTHWEST: return WEST;
         }        
     }
+
     return -1;
 }
 
@@ -96,7 +90,7 @@ void parse(char command)
         putchar(command);
 
     switch (command) {
-      /* directional */
+      /* directional */   /* I need to prettify this */
       case '`': direction = NORTHWEST; break;
       case '^': direction = NORTH; break;
       case '/': direction = NORTHEAST; break;
@@ -131,8 +125,8 @@ void parse(char command)
       stack[size++] = command - '0';             break;
 
       /* conditionals */
-      case '?': skip = (size ? stack[size-1] : 0) < 1;                  break;
-      case '!': skip = (size ? stack[size-1] : 0) > 0;                  break;
+      case '?': skip = size ? (stack[size-1] < 1) : 0;                  break;
+      case '!': skip = size ? (stack[size-1] > 0) : 0;                  break;
       case 's': skip = (size ? stack[size-1] : 0);                      break;
       case ';': if ((size ? stack[size-1] : 0) < 1) exit(EXIT_SUCCESS); break;
 
