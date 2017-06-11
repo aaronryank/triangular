@@ -45,6 +45,7 @@ void triangular(void)
           case SOUTHEAST:   dx =  1; dy =  1; break;
         }
         
+        skip = skip < 0 ? 0 : skip;
         x += dx * (skip + 1);
         y += dy * (skip + 1);
         skip = 0;
@@ -123,17 +124,17 @@ void parse(char command)
 
       case '$': stack[size++] = getchar() - '0'; break;
       case '~': stack[size++] = getchar();       break;
-      case '%': printf("%d",(size && stack[size-1]));      break;
-      case '@': putchar((size && stack[size-1]));          break;
+      case '%': printf("%d",size ? stack[size-1] : 0);      break;
+      case '@': putchar(size ? stack[size-1] : 0);          break;
 
       case '1': case '2': case '3': case '4': case '5': case '6': case '7': case'8': case '9':
       stack[size++] = command - '0';             break;
 
       /* conditionals */
-      case '?': skip = (size && stack[size-1]) < 1;                  break;
-      case '!': skip = (size && stack[size-1]) > 0;                  break;
-      case 's': skip = (size && stack[size-1]);                      break;
-      case ';': if ((size && stack[size-1]) < 1) exit(EXIT_SUCCESS); break;
+      case '?': skip = (size ? stack[size-1] : 0) < 1;                  break;
+      case '!': skip = (size ? stack[size-1] : 0) > 0;                  break;
+      case 's': skip = (size ? stack[size-1] : 0);                      break;
+      case ';': if ((size ? stack[size-1] : 0) < 1) exit(EXIT_SUCCESS); break;
 
       case 'x': jumps--;
       case '(':
