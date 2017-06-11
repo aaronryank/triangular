@@ -8,7 +8,7 @@ For example, if the source code was `123456`, Triangular would format this into:
      2 3
     4 5 6
 
-Command-line options:
+To build, type `make`. This will generate an executable `triangular`. Command-line options:
 
     --verbose                     prettyprint the triangle
     --verbose --display-code      prettyprint the triangle and display code as it's read
@@ -18,6 +18,7 @@ Triangular has:
  - A stack size of 30,000
  - A maximum of 300 jumps
  - A maximum source code of 1000 lines, 1000 characters per line
+ - A second stack (see section Memory), which is currently just one value.
 
 There are eight directions in which the instruction pointer can move (lines added for prettiness):
 
@@ -93,6 +94,12 @@ Acronyms: **ToS** = top of stack, **IP** = instruction pointer
     % print ToS as integer
     @ print ToS as character
     1 push 1 to stack. 2 pushes 2, etc.
+
+## Memory commands
+
+    P pop ToS stack to memory
+    S stash ToS in memory
+    U pull memory to stack
 
 ## Conditionals (stolen directly from Surface)
 

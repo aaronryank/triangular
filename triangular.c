@@ -3,6 +3,7 @@
 
 int stack[30000];
 int size;
+int memory;
 
 struct { int x, y, d; } jump[300];
 int jumps;
@@ -126,6 +127,11 @@ void parse(char command)
 
       case '1': case '2': case '3': case '4': case '5': case '6': case '7': case'8': case '9':
       stack[size++] = command - '0';             break;
+
+      /* memory */
+      case 'P': size && (memory = stack[size-1]); size && (size--); break;
+      case 'S': size && (memory = stack[size-1]);                   break;
+      case 'U': memory && (stack[size++] = memory);                 break;
 
       /* conditionals */
       case '?': skip = size ? (stack[size-1] <= 0) : 1;                  break;
