@@ -120,7 +120,7 @@ void parse(char command)
                 size++;
                 break;
 
-      case '1': case '2': case '3': case '4': case '5': case '6': case '7': case'8': case '9':
+      case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case'8': case '9':
       stack[size++] = command - '0';             break;
 
       /* memory */
@@ -134,7 +134,7 @@ void parse(char command)
       case 's': skip = (size ? stack[size-1] : 0);                     break;
       case ';': if (!size || (stack[size-1] <= 0)) exit(EXIT_SUCCESS); break;
 
-      case 'x': jumps && jumps--; break;
+      case 'x': jumps && (jumps--); break;
       case '(':
         jump[jumps].x = x;
         jump[jumps].y = y;
@@ -153,6 +153,8 @@ void parse(char command)
           x = jump[jumps-1].x;
           y = jump[jumps-1].y;
           direction = jump[jumps-1].d;
+        } else {
+            jumps && (jumps--);
         }
         break;
     }

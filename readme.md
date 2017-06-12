@@ -94,7 +94,7 @@ Acronyms: **ToS** = top of stack, **IP** = instruction pointer
     ~ input ToS as a character
     % print ToS as integer
     @ print ToS as character
-    1 push 1 to stack. 2 pushes 2, etc.
+    0 push 0 to stack. 1 pushes 1, 2 pushes 2, etc.
 
 ## Memory commands
 
@@ -109,7 +109,7 @@ Acronyms: **ToS** = top of stack, **IP** = instruction pointer
     s skip the quantity of following instructions as specified by the number contained in ToS
     ( set a point to be jumped to by ) and ]
     ) unconditionally move the instruction pointer back to the most recent (
-    ] move the instruction pointer back to the most recent ( if the ToS is > 0
+    ] move the instruction pointer back to the most recent ( if the ToS is > 0, otherwise do away with the most recently accumulated (
     x do away with the most recently accumulated (
     ; end program if ToS <= 0
 
