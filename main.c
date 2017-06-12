@@ -18,10 +18,20 @@ int main(int argc, char **argv)
     if (argc < 2)
         return fprintf(stderr,"Usage: triangular source.tri\n");
 
-    if (argc > 2 && !strcmp(argv[2],"--verbose"))
-        verbose = 1;
-    if (argc > 3 && !strcmp(argv[3],"--display-code"))
-        display_code = 1;
+    if (argc > 2) {
+        int x;
+        for (x = 2; x < argc; x++) {
+            if (!strcmp(argv[x],"--verbose"))
+                verbose = 1;
+            else if (!strcmp(argv[x],"--display-code"))
+                display_code = 1;
+        }
+    }
+
+    //if (argc > 2 && !strcmp(argv[2],"--verbose"))
+    //    verbose = 1;
+    //if (argc > 3 && !strcmp(argv[3],"--display-code"))
+    //    display_code = 1;
 
     FILE *in = fopen(argv[1],"r");
 

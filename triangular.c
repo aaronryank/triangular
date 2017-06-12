@@ -13,13 +13,14 @@ extern int verbose, display_code;
 extern char buf[1000][1000];
 int direction, skip, x, y, dx, dy;
 
-enum { UNDEF, NORTHWEST, NORTH, NORTHEAST, WEST, EAST, SOUTHWEST, SOUTH, SOUTHEAST };
+//enum { UNDEF, NORTHWEST, NORTH, NORTHEAST, WEST, EAST, SOUTHWEST, SOUTH, SOUTHEAST };
+enum { UNDEF, NORTHWEST, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST };
 
 void parse(char);
 
 void triangular(void)
 {
-    direction = 8;
+    direction = SOUTHEAST;
 
     while (1)
     {
@@ -111,7 +112,7 @@ void parse(char command)
       case 'i': size > 0 && (stack[size-1]++);                                      break;
       case 'd': size > 0 && (stack[size-1]--);                                      break;
 
-      case '$': stack[size++] = getchar() - '0';            break;
+      case '$': scanf("%d",&stack[size++]);                 break;
       case '~': stack[size++] = getchar();                  break;
       case '%': printf("%d",size ? stack[size-1] : 0);      break;
       case '@': putchar(size ? stack[size-1] : 0);          break;

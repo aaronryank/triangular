@@ -11,7 +11,7 @@ For example, if the source code was `123456`, Triangular would format this into:
 To build, type `make`. This will generate an executable `triangular`. Command-line options:
 
     --verbose                     prettyprint the triangle
-    --verbose --display-code      prettyprint the triangle and display code as it's read
+    --display-code                display code as it's read
 
 Triangular has:
 
@@ -22,37 +22,36 @@ Triangular has:
 
 Acronyms: **ToS** = top of stack, **IP** = instruction pointer
 
-There are eight directions in which the instruction pointer can move (the instruction pointer is located at `0`):
+There are eight directions in which the IP can move (the IP is located at `.`):
 
-      . 2 .
+        2  
        1 3
-      4 0 5
-       6 8
-      . 7 .
+      8 . 4
+       7 5
+        6
 
-(. is the placeholder command, the do-nothing look-pretty character.)
+(`.` is a no-op.)
 
 The directional numbers correspond to the cardinal directions and their combinations like so:
 
     1 NorthWest  `
     2 North      ^
     3 NorthEast  /
-    4 West       <
-    5 East       >
-    6 SouthWest  ,
-    7 South      v
-    8 SouthEast  \
+    4 East       >
+    5 SouthEast  \
+    6 South      v
+    7 SouthWest  ,
+    8 West       <
 
-Visualization of directional switches
+Visualization of directional switches:
 
        ^
       ` /
-     < 0 >  
+     < . >  
       , \
        v
 
-
-IP starts from the top of the triangle, moving in direction 8 (SE).
+IP starts from the top of the triangle, moving in direction 5 (SE).
 
         \
          .
@@ -63,7 +62,6 @@ IP starts from the top of the triangle, moving in direction 8 (SE).
 
 If the IP goes off the playing field, the program will terminate.
 
-
 # Commands
 
 ## IP switches
@@ -71,11 +69,11 @@ If the IP goes off the playing field, the program will terminate.
     ` switch to direction 1 (NW)
     ^ switch to direction 2 (N)
     / switch to direction 3 (NE)
-    < switch to direction 4 (W)
-    > switch to direction 5 (E)
-    , switch to direction 6 (SW)
-    v switch to direction 7 (S)
-    \ switch to direction 8 (SE)
+    > switch to direction 4 (E)
+    \ switch to direction 5 (SE)
+    v switch to direction 6 (S)
+    , switch to direction 7 (SW)
+    < switch to direction 8 (W)
     o rotate the direction of the IP clockwise
     e rotate the direction of the IP counter-clockwise
     c rotate the direction of the IP clockwise, then become z
