@@ -1,6 +1,6 @@
 # Triangular
 
-Triangular is a two-dimensional stack-based esoteric programming language, inspired by Surface and Hexagony.
+Triangular is a two-dimensional stack-based esoteric programming language, inspired by [Surface](http://esolangs.org/wiki/Surface) and [Hexagony](https://github.com/m-ender/hexagony).
 Source code is read in the shape of the smallest triangle that the length of the code can fit into. Whitespace is ignored.
 For example, if the source code was `123456`, Triangular would format this into:
 
@@ -20,26 +20,37 @@ Triangular has:
  - A maximum source code of 1000 lines, 1000 characters per line
  - A second stack (see section Memory), which is currently just one value.
 
-There are eight directions in which the instruction pointer can move (lines added for prettiness):
+Acronyms: **ToS** = top of stack, **IP** = instruction pointer
 
-      1 2 3
-       \|/
-      4-.-5
-       /|\
-      6 7 8
+There are eight directions in which the instruction pointer can move (the instruction pointer is located at `0`):
+
+      . 2 .
+       1 3
+      4 0 5
+       6 8
+      . 7 .
 
 (. is the placeholder command, the do-nothing look-pretty character.)
 
 The directional numbers correspond to the cardinal directions and their combinations like so:
 
-    1 NorthWest
-    2 North
-    3 NorthEast
-    4 West
-    5 East
-    6 SouthWest
-    7 South
-    8 SouthEast
+    1 NorthWest  `
+    2 North      ^
+    3 NorthEast  /
+    4 West       <
+    5 East       >
+    6 SouthWest  ,
+    7 South      v
+    8 SouthEast  \
+
+Visualization of directional switches
+
+       ^
+      ` /
+     < 0 >  
+      , \
+       v
+
 
 IP starts from the top of the triangle, moving in direction 8 (SE).
 
@@ -52,11 +63,6 @@ IP starts from the top of the triangle, moving in direction 8 (SE).
 
 If the IP goes off the playing field, the program will terminate.
 
-Acronyms: **ToS** = top of stack, **IP** = instruction pointer
-
-     `^/
-     <.>  visualization of directional switches
-     ,v\
 
 # Commands
 
@@ -115,4 +121,4 @@ Acronyms: **ToS** = top of stack, **IP** = instruction pointer
 
 ## Unused characters
 
-    #'":[{}|abfghjklmnqrtuwyABCDEFGHIJKLMNOQRTVWXYZ
+    #'"[{}|abfghjklmnqrtuwyABCDEFGHIJKLMNOQRTVWXYZ
