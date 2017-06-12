@@ -121,4 +121,4 @@ If the IP goes off the playing field, the program will terminate.
 
 ## Unused characters
 
-    0#='":[{}|abfghjklmnqrtuwyABCDEFGHIJKLMNOQRTVWXYZ
+    #'"[{}|abfghjklmnqrtuwyABCDEFGHIJKLMNOQRTVWXYZ
