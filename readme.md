@@ -115,4 +115,4 @@ Acronyms: **ToS** = top of stack, **IP** = instruction pointer
 
 ## Unused characters
 
-    0#'":[{}|abfghjklmnqrtuwyABCDEFGHIJKLMNOQRTVWXYZ
+    #'":[{}|abfghjklmnqrtuwyABCDEFGHIJKLMNOQRTVWXYZ
