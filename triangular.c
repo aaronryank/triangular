@@ -116,7 +116,7 @@ void parse(char command)
       case '%': printf("%d",size ? stack[size-1] : 0);      break;
       case '@': putchar(size ? stack[size-1] : 0);          break;
 
-      case '=': size > 1 ? stack[size] = (stack[size-2] == stack[size-1]) : (stack[size] = 0);
+      case '=': stack[size] = size > 1 ? (stack[size-2] == stack[size-1]) : 0;
                 size++;
                 break;
 
