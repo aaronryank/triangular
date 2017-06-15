@@ -112,6 +112,7 @@ void parse(char command)
       case 'i': size > 0 ?  (stack[size-1]++) : (stack[size++] = 1);                break;
       case 'd': size > 0 && (stack[size-1]--);                                      break;
       case '|': size > 0 && (stack[size-1] = -stack[size-1]);                       break;
+      case 'm': size > 1 && (stack[size-2] %= stack[size-1]); size > 1 && (size--); break;
 
       case '$': scanf("%d",&stack[size++]);                 break;
       case '~': stack[size++] = getchar();                  break;
@@ -121,6 +122,12 @@ void parse(char command)
       case '=': stack[size] = size > 1 ? (stack[size-2] == stack[size-1]) : 0;
                 size++;
                 break;
+      case 'l': stack[size] = size > 1 ? (stack[size-2] < stack[size-1]) : 0;
+                size++;
+                break;
+      case 'g': stack[size] = size > 1 ? (stack[size-2] > stack[size-1]) : 0;
+                size++;
+                break; 
 
       case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case'8': case '9':
       stack[size++] = command - '0';             break;

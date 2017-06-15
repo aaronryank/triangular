@@ -92,6 +92,8 @@ If the IP goes off the playing field, the program will terminate.
     * multiply ToS and ToS-1 together, pop both, push result
     _ divide ToS-1 by ToS, pop both, push result
     = compare ToS and ToS-1 for equality, DON'T pop, push result
+    l push 1 if ToS-1 < ToS, otherwise 0
+    g push 1 if ToS-1 > ToS, otherwise 0
     | negate ToS (turns positive into negative, negative into positive)
     d decrement ToS
     i increment ToS
@@ -121,4 +123,4 @@ If the IP goes off the playing field, the program will terminate.
 
 ## Unused characters
 
-    #'"[{}abfghjklmnqrtuwyGHIJKLMNOQRTVWXYZ
+    #'"[{}abfhjkmnqrtuwyGHIJKLMNOQRTVWXYZ
