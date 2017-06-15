@@ -109,7 +109,7 @@ void parse(char command)
       case '-': size > 1 && (stack[size-2] -= stack[size-1]); size > 1 && (size--); break;
       case '*': size > 1 && (stack[size-2] *= stack[size-1]); size > 1 && (size--); break;
       case '_': size > 1 && (stack[size-2] /= stack[size-1]); size > 1 && (size--); break;
-      case 'i': size > 0 && (stack[size-1]++);                                      break;
+      case 'i': size > 0 ?  (stack[size-1]++) : (stack[size++] = 1);                break;
       case 'd': size > 0 && (stack[size-1]--);                                      break;
 
       case '$': scanf("%d",&stack[size++]);                 break;
