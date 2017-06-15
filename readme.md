@@ -92,6 +92,7 @@ If the IP goes off the playing field, the program will terminate.
     * multiply ToS and ToS-1 together, pop both, push result
     _ divide ToS-1 by ToS, pop both, push result
     = compare ToS and ToS-1 for equality, DON'T pop, push result
+    | negate ToS (turns positive into negative, negative into positive)
     d decrement ToS
     i increment ToS
     $ input ToS as a number
@@ -99,6 +100,7 @@ If the IP goes off the playing field, the program will terminate.
     % print ToS as integer
     @ print ToS as character
     0 push 0 to stack. 1 pushes 1, 2 pushes 2, etc.
+    A push 10 to stack. B pushes 11, etc. up to F.
 
 ## Memory commands
 
@@ -119,4 +121,4 @@ If the IP goes off the playing field, the program will terminate.
 
 ## Unused characters
 
-    #'"[{}|abfghjklmnqrtuwyABCDEFGHIJKLMNOQRTVWXYZ
+    #'"[{}abfghjklmnqrtuwyGHIJKLMNOQRTVWXYZ
