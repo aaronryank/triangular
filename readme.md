@@ -97,13 +97,17 @@ If the IP goes off the playing field, the program will terminate.
     | negate ToS (turns positive into negative, negative into positive)
     d decrement ToS
     i increment ToS
+    0 push 0 to stack. 1 pushes 1, 2 pushes 2, etc.
+    A push 10 to stack. B pushes 11, etc. up to F.
+    " swap top two stack values
+
+## I/O commands
+
     $ input ToS as a number
     ~ input ToS as a character
     % print ToS as integer
     @ print ToS as character
-    0 push 0 to stack. 1 pushes 1, 2 pushes 2, etc.
-    A push 10 to stack. B pushes 11, etc. up to F.
-    " swap top two stack values
+    # print ToS as character and pop
 
 ## Memory commands
 
@@ -124,4 +128,4 @@ If the IP goes off the playing field, the program will terminate.
 
 ## Unused characters
 
-    #'[{}abfhjkmnqrtuwyGHIJKLMNOQRTVWXYZ
+    '[{}abfhjkmnqrtuwyGHIJKLMNOQRTVWXYZ

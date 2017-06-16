@@ -118,7 +118,8 @@ void parse(char command)
       case '$': scanf("%d",&stack[size++]);                 break;
       case '~': stack[size++] = getchar();                  break;
       case '%': printf("%d",size ? stack[size-1] : 0);      break;
-      case '@': putchar(size ? stack[size-1] : 0);          break;
+      case '@': size && putchar(stack[size-1]);             break;
+      case '#': size && putchar(stack[size-1]) && (size--); break;
 
       case '=': stack[size] = size > 1 ? (stack[size-2] == stack[size-1]) : 0;
                 size++;
