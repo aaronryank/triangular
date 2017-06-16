@@ -13,10 +13,10 @@ extern int verbose, display_code;
 extern char buf[1000][1000];
 int direction, skip, x, y, dx, dy;
 
-//enum { UNDEF, NORTHWEST, NORTH, NORTHEAST, WEST, EAST, SOUTHWEST, SOUTH, SOUTHEAST };
 enum { UNDEF, NORTHWEST, NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST };
 
 void parse(char);
+int swap(int*,int*);
 
 void triangular(void)
 {
@@ -113,6 +113,7 @@ void parse(char command)
       case 'd': size > 0 && (stack[size-1]--);                                      break;
       case '|': size > 0 && (stack[size-1] = -stack[size-1]);                       break;
       case 'm': size > 1 && (stack[size-2] %= stack[size-1]); size > 1 && (size--); break;
+      case '"': size > 1 && swap(&stack[size-2],&stack[size-1]);                    break;
 
       case '$': scanf("%d",&stack[size++]);                 break;
       case '~': stack[size++] = getchar();                  break;
@@ -127,7 +128,7 @@ void parse(char command)
                 break;
       case 'g': stack[size] = size > 1 ? (stack[size-2] > stack[size-1]) : 0;
                 size++;
-                break; 
+                break;
 
       case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case'8': case '9':
       stack[size++] = command - '0';             break;
@@ -169,4 +170,11 @@ void parse(char command)
         }
         break;
     }
+}
+
+int swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }

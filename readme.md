@@ -103,6 +103,7 @@ If the IP goes off the playing field, the program will terminate.
     @ print ToS as character
     0 push 0 to stack. 1 pushes 1, 2 pushes 2, etc.
     A push 10 to stack. B pushes 11, etc. up to F.
+    " swap top two stack values
 
 ## Memory commands
 
@@ -123,4 +124,4 @@ If the IP goes off the playing field, the program will terminate.
 
 ## Unused characters
 
-    #'"[{}abfhjkmnqrtuwyGHIJKLMNOQRTVWXYZ
+    #'[{}abfhjkmnqrtuwyGHIJKLMNOQRTVWXYZ
