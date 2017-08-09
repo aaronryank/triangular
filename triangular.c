@@ -120,7 +120,7 @@ void parse(char command)
       case '*': size > 1 && (stack[size-2] *= stack[size-1]); size > 1 && (size--); break;
       case '_': size > 1 && (stack[size-2] /= stack[size-1]); size > 1 && (size--); break;
       case 'i': size > 0 ?  (stack[size-1]++) : (stack[size++] = 1);                break;
-      case 'd': size > 0 && (stack[size-1]--);                                      break;
+      case 'd': size > 0 ?  (stack[size-1]--) : (stack[size++] = -1);               break;
       case '|': size > 0 && (stack[size-1] = -stack[size-1]);                       break;
       case 'm': size > 1 && (stack[size-2] %= stack[size-1]); size > 1 && (size--); break;
       case '"': size > 1 && swap(&stack[size-2],&stack[size-1]);                    break;
@@ -134,12 +134,14 @@ void parse(char command)
       case '=': stack[size] = size > 1 ? (stack[size-2] == stack[size-1]) : 0;
                 size++;
                 break;
-      case 'l': stack[size] = size > 1 ? (stack[size-2] < stack[size-1]) : 0;
+      case 'l': size > 1 && (stack[size-2] = (stack[size-2] < stack[size-1])); size > 1 && (size--);
+      case 'g': size > 1 && (stack[size-2] = (stack[size-2] > stack[size-1])); size > 1 && (size--);
+      /*case 'l': stack[size] = size > 1 ? (stack[size-2] < stack[size-1]) : 0;
                 size++;
                 break;
       case 'g': stack[size] = size > 1 ? (stack[size-2] > stack[size-1]) : 0;
                 size++;
-                break;
+                break;*/
       case 'u': size && stack[size-1] < 0 && (stack[size-1] = -stack[size-1]);
                 break;
 

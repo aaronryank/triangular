@@ -87,7 +87,7 @@ If the IP goes off the playing field, the program will terminate.
 
     p pop
     : duplicate ToS
-    + add ToS and ToS-1, pop both, push result
+    + add ToS to ToS-1, pop both, push result
     - subtract ToS from ToS-1, pop both, push result
     * multiply ToS and ToS-1 together, pop both, push result
     _ divide ToS-1 by ToS, pop both, push result
@@ -100,8 +100,8 @@ If the IP goes off the playing field, the program will terminate.
 
 ## Extra stack commands
 
-    l push 1 if ToS-1 < ToS, otherwise 0
-    g push 1 if ToS-1 > ToS, otherwise 0
+    l push 1 if ToS-1 < ToS, otherwise 0, discard values used
+    g push 1 if ToS-1 > ToS, otherwise 0, discard values used
     | negate ToS (positive -> negative, negative -> positive)
     u un-sign ToS (negative -> positive)
     m divide ToS-1 by ToS, pop both, push remainder
