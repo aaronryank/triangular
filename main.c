@@ -60,9 +60,9 @@ int main(int argc, char **argv)
                     j--;
                 }
             }
-            printf("\n");
+            puts("");
         }
-        putchar('\n');
+        puts("");
     }
 
     rewind(in);
