@@ -8,7 +8,7 @@ int memory;
 struct { int x, y, d; } jump[300];
 int jumps;
 
-extern int verbose, display_code;
+extern int display_code;
 
 extern char buf[1000][1000];
 int direction, skip, x, y, dx, dy;
@@ -81,8 +81,10 @@ int next_direction(int direction, int change)
 
 void parse(char command)
 {
-    if (display_code)
-        putchar(command);
+    if (display_code) {
+        printf("Executing %c\n",command);
+        usleep(500000);
+    }        
 
     switch (command) {
       /* directional */
@@ -136,12 +138,6 @@ void parse(char command)
                 break;
       case 'l': size > 1 && (stack[size-2] = (stack[size-2] < stack[size-1])); size > 1 && (size--);
       case 'g': size > 1 && (stack[size-2] = (stack[size-2] > stack[size-1])); size > 1 && (size--);
-      /*case 'l': stack[size] = size > 1 ? (stack[size-2] < stack[size-1]) : 0;
-                size++;
-                break;
-      case 'g': stack[size] = size > 1 ? (stack[size-2] > stack[size-1]) : 0;
-                size++;
-                break;*/
       case 'u': size && stack[size-1] < 0 && (stack[size-1] = -stack[size-1]);
                 break;
 

@@ -5,7 +5,7 @@
 /* (x*x+x)/2 */
 
 char buf[1000][1000];
-int verbose, display_code;
+int prettyprint, display_code;
 
 int getmax(int);
 void space(int);
@@ -21,9 +21,9 @@ int main(int argc, char **argv)
     if (argc > 2) {
         int x;
         for (x = 2; x < argc; x++) {
-            if (!strcmp(argv[x],"--verbose"))
-                verbose = 1;
-            else if (!strcmp(argv[x],"--display-code"))
+            if (!strcmp(argv[x],"--pretty") || !strcmp(argv[x],"--prettyprint"))
+                prettyprint = 1;
+            else if (!strcmp(argv[x],"--display-code") || !strcmp(argv[x],"--debug") || !strcmp(argv[x],"--step"))
                 display_code = 1;
         }
     }
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
     int len = getmax(size) - 1;
     int l_cpy = len;
 
-    if (verbose)
+    if (prettyprint)
     {
         int j;
         for (i = 1; l_cpy; l_cpy--, i++) {
