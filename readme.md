@@ -97,9 +97,6 @@ If the IP goes off the playing field, the program will terminate.
     0 push 0 to stack. 1 pushes 1, 2 pushes 2, etc.
     A push 10 to stack. B pushes 11, etc. up to F.
     " swap top two stack values
-
-## Extra stack commands
-
     l push 1 if ToS-1 < ToS, otherwise 0, discard values used
     g push 1 if ToS-1 > ToS, otherwise 0, discard values used
     | negate ToS (positive -> negative, negative -> positive)
