@@ -136,8 +136,8 @@ void parse(char command)
       case '=': stack[size] = size > 1 ? (stack[size-2] == stack[size-1]) : 0;
                 size++;
                 break;
-      case 'l': size > 1 && (stack[size-2] = (stack[size-2] < stack[size-1])); size > 1 && (size--);
-      case 'g': size > 1 && (stack[size-2] = (stack[size-2] > stack[size-1])); size > 1 && (size--);
+      case 'l': size > 1 && (stack[size-2] = (stack[size-2] < stack[size-1])); size > 1 && (size--); break;
+      case 'g': size > 1 && (stack[size-2] = (stack[size-2] > stack[size-1])); size > 1 && (size--); break;
       case 'u': size && stack[size-1] < 0 && (stack[size-1] = -stack[size-1]);
                 break;
 
