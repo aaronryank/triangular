@@ -105,14 +105,14 @@ void parse(char command)
       case 'z': direction = next_direction(direction, -1); buf[y][x] = 'c'; break;
 
       /* more directionals jkmnqrtw */
-      case 'j': size && stack[size-1] && (direction = NORTHWEST);  break;
-      case 'k': size && stack[size-1] && (direction = NORTH);      break;
-      case 'y': size && stack[size-1] && (direction = NORTHEAST);  break;
-      case 'n': size && stack[size-1] && (direction = EAST);       break;
-      case 'q': size && stack[size-1] && (direction = SOUTHEAST);  break;
-      case 'r': size && stack[size-1] && (direction = SOUTH);      break;
-      case 't': size && stack[size-1] && (direction = SOUTHWEST);  break;
-      case 'w': size && stack[size-1] && (direction = WEST);       break;
+      case 'j': size && stack[size-1] > 0 && (direction = NORTHWEST);  break;
+      case 'k': size && stack[size-1] > 0 && (direction = NORTH);      break;
+      case 'y': size && stack[size-1] > 0 && (direction = NORTHEAST);  break;
+      case 'n': size && stack[size-1] > 0 && (direction = EAST);       break;
+      case 'q': size && stack[size-1] > 0 && (direction = SOUTHEAST);  break;
+      case 'r': size && stack[size-1] > 0 && (direction = SOUTH);      break;
+      case 't': size && stack[size-1] > 0 && (direction = SOUTHWEST);  break;
+      case 'w': size && stack[size-1] > 0 && (direction = WEST);       break;
 
       /* program */
       case '&': exit(EXIT_SUCCESS);
